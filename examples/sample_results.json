@@ -1,0 +1,41 @@
+{
+  "suite": {
+    "name": "basic sanity suite",
+    "description": "Small local LLM sanity checks",
+    "tests": []
+  },
+  "config": {
+    "endpoint": "http://localhost:8000/v1/chat/completions",
+    "model": "local-model",
+    "temperature": 0.0,
+    "max_tokens": 256
+  },
+  "summary": {
+    "total": 2,
+    "passed": 1,
+    "failed": 1,
+    "warnings": 0,
+    "critical": 1,
+    "errors": 0
+  },
+  "results": [
+    {
+      "id": "identity_001",
+      "category": "identity",
+      "prompt": "Who are you?",
+      "response": "I am a small local language model.",
+      "passed": true,
+      "severity": "ok",
+      "findings": [],
+      "metrics": {
+        "char_count": 34,
+        "word_count": 7,
+        "line_count": 1,
+        "repeated_unigram_ratio": 0.0,
+        "repeated_bigram_ratio": 0.0,
+        "repeated_trigram_ratio": 0.0,
+        "repeated_ngram_ratio": 0.0
+      }
+    }
+  ]
+}

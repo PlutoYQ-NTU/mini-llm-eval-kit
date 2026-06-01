@@ -1,5 +1,9 @@
 # mini-llm-eval-kit
 
+[![tests](https://github.com/PlutoYQ-NTU/mini-llm-eval-kit/actions/workflows/tests.yml/badge.svg)](https://github.com/PlutoYQ-NTU/mini-llm-eval-kit/actions/workflows/tests.yml)
+![Python](https://img.shields.io/badge/python-3.11%2B-blue)
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+
 `mini-llm-eval-kit` is a dependency-light Python CLI for evaluating small local language models through an OpenAI-compatible chat completions endpoint.
 
 It is designed for developers training or running small local models, including from-scratch models, distilled models, fine-tuned models, and local inference servers that expose a `/v1/chat/completions`-style API.
@@ -292,3 +296,10 @@ See [ROADMAP.md](ROADMAP.md) for more.
 ## Contributing
 
 Contributions are welcome. Keep the project dependency-light, avoid private data in examples, add tests for behavior changes, and document new suite fields or report formats.
+## Related projects
+
+This repository is part of a small toolkit for local coding-agent workflows and small local LLM evaluation:
+
+- [`agent-approval-gate`](https://github.com/PlutoYQ-NTU/agent-approval-gate): classify command risk before a local coding agent runs shell commands.
+- [`agent-run-report`](https://github.com/PlutoYQ-NTU/agent-run-report): generate Markdown and JSON reports after a local coding-agent run.
+- [`mini-llm-eval-kit`](https://github.com/PlutoYQ-NTU/mini-llm-eval-kit): evaluate small local language models with configurable prompt suites.

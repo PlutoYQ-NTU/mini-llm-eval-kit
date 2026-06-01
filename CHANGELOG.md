@@ -1,5 +1,19 @@
 # Changelog
 
+## v0.1.1 - Unreleased
+
+### Added
+
+- Added GitHub Actions CI.
+- Added issue templates.
+- Added README badges.
+- Added related-project links.
+
+### Fixed
+
+- Fixed broken bilingual suite examples caused by encoding issues.
+- Reduced false positives in synthetic anti-leak example patterns.
+
 ## v0.1.0 - 2026-06-02
 
 Initial release.

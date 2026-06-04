@@ -59,3 +59,33 @@ critical = true
     )
     assert code == 1
     assert (tmp_path / "reports" / "eval_report.md").exists()
+
+
+def test_compare_cli_writes_report_and_fails_on_regression(tmp_path: Path) -> None:
+    baseline = tmp_path / "baseline.json"
+    candidate = tmp_path / "candidate.json"
+    baseline.write_text(
+        '{"results": [{"id": "a", "category": "custom", "passed": true, "severity": "ok"}]}',
+        encoding="utf-8",
+    )
+    candidate.write_text(
+        '{"results": [{"id": "a", "category": "custom", "passed": false, "severity": "warning"}]}',
+        encoding="utf-8",
+    )
+    output = tmp_path / "comparison.md"
+
+    code = cli.main(
+        [
+            "compare",
+            "--baseline",
+            str(baseline),
+            "--candidate",
+            str(candidate),
+            "--out",
+            str(output),
+            "--fail-on-regression",
+        ]
+    )
+
+    assert code == 1
+    assert "Regressed: 1" in output.read_text(encoding="utf-8")

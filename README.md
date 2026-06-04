@@ -68,6 +68,15 @@ List supported labels and evaluator rule types:
 mini-llm-eval list-builtins
 ```
 
+Compare two previous result files:
+
+```bash
+mini-llm-eval compare \
+  --baseline reports/before/results.json \
+  --candidate reports/after/results.json \
+  --out reports/comparison.md
+```
+
 ## CLI options
 
 ### `mini-llm-eval run`
@@ -94,6 +103,13 @@ mini-llm-eval list-builtins
 ### `mini-llm-eval list-builtins`
 
 Prints built-in category labels, evaluator rule types, and starter suite templates.
+
+### `mini-llm-eval compare`
+
+- `--baseline PATH`: Baseline `results.json` path.
+- `--candidate PATH`: Candidate `results.json` path.
+- `--out PATH`: Optional Markdown comparison report path.
+- `--fail-on-regression`: Return nonzero when severity or pass/fail regressions are detected.
 
 ## Prompt suite format
 
@@ -194,6 +210,8 @@ reports/eval_report.md
 reports/results.csv
 reports/results.json
 ```
+
+See `docs/local_endpoints.md` for generic Ollama, LM Studio, vLLM, and llama.cpp server endpoint examples.
 
 The Markdown report includes:
 

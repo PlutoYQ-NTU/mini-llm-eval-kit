@@ -7,8 +7,7 @@ Future ideas for `mini-llm-eval-kit`:
 - vLLM and Ollama examples.
 - Richer scoring plugins.
 - HTML reports.
-- Baseline comparison mode.
-- Regression testing mode.
+- Richer baseline comparison output and regression testing workflows.
 - GitHub Actions examples.
 - Integration with `agent-run-report`.
 - Integration with `agent-approval-gate`.

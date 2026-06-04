@@ -8,6 +8,7 @@ from typing import Sequence
 
 from .builtins import BUILTIN_CATEGORIES, EVALUATOR_TYPES, TEMPLATES, get_template
 from .client import ChatCompletionClient, ClientError
+from .comparison import compare_result_files, render_comparison_markdown
 from .csv_writer import write_csv_results
 from .evaluators import evaluate_response
 from .json_writer import write_json_report
@@ -143,6 +144,23 @@ def cmd_list_builtins(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_compare(args: argparse.Namespace) -> int:
+    try:
+        report = compare_result_files(args.baseline, args.candidate)
+    except (OSError, ValueError) as exc:
+        print(f"compare error: {exc}", file=sys.stderr)
+        return 2
+    rendered = render_comparison_markdown(report)
+    if args.out:
+        output_path = Path(args.out)
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        output_path.write_text(rendered, encoding="utf-8")
+        print(f"Wrote comparison report to {output_path}")
+    else:
+        print(rendered, end="")
+    return 1 if args.fail_on_regression and report.regressed > 0 else 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="mini-llm-eval",
@@ -173,6 +191,13 @@ def build_parser() -> argparse.ArgumentParser:
 
     list_parser = subparsers.add_parser("list-builtins", help="Print built-in categories and evaluator types.")
     list_parser.set_defaults(func=cmd_list_builtins)
+
+    compare_parser = subparsers.add_parser("compare", help="Compare two previous results.json files.")
+    compare_parser.add_argument("--baseline", required=True, help="Baseline results.json path.")
+    compare_parser.add_argument("--candidate", required=True, help="Candidate results.json path.")
+    compare_parser.add_argument("--out", help="Optional Markdown comparison report path.")
+    compare_parser.add_argument("--fail-on-regression", action="store_true", help="Return nonzero when regressions are detected.")
+    compare_parser.set_defaults(func=cmd_compare)
 
     return parser
 

@@ -34,3 +34,7 @@ mini-llm-eval = "mini_llm_eval_kit.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

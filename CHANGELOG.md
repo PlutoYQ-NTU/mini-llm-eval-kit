@@ -4,6 +4,10 @@
 
 ### Added
 
+- Added `mini-llm-eval compare` for comparing two previous `results.json` files.
+- Added generic local endpoint recipes for Ollama, LM Studio, vLLM, and llama.cpp server.
+- Added a regression-oriented example prompt suite.
+- Added contribution and pull request documentation.
 - Added GitHub Actions CI.
 - Added issue templates.
 - Added README badges.
